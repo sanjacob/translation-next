@@ -14,7 +14,8 @@ export default function LanguageSelector({ onSelected }) {
         {Object.entries(languages).map(([k, { country, name }]) => (
           <LanguageButton
             key={k}
-            code={country}
+            country={country}
+            code={k}
             name={name}
             onSelected={onSelected}
           />

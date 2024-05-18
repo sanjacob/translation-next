@@ -14,11 +14,11 @@ export default function Home() {
   const [selectedLangs, setSelectedLangs] = useState([]);
   const [isLoading, setLoading] = useState(false);
 
-  const onSelected = (code, selected) => {
+  const onSelected = (code, country, selected) => {
     setSelectedLangs(
       selected
-        ? [...selectedLangs, code]
-        : selectedLangs.filter((x) => x != code),
+        ? [...selectedLangs, {country, code}]
+        : selectedLangs.filter((x) => x.code != code),
     );
   };
 
@@ -33,7 +33,7 @@ export default function Home() {
 
     try {
       const response = await fetch(
-        `/api?text=${text}&languages=${selectedLangs}`,
+        `/api?text=${text}&languages=${selectedLangs.map((e) => e.code)}`,
       );
       const responseData = await response.json();
 

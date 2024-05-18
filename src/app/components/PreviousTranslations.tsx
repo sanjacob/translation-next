@@ -1,4 +1,4 @@
-"use local"
+"use client"
 import ReactCountryFlag from "react-country-flag";
 
 export default function PreviousTranslations() {
@@ -10,14 +10,13 @@ export default function PreviousTranslations() {
       <ul className="flex flex-row flex-wrap mt-4">
         {translations.map(({ text, langs }, i) => (
           <li className="shadow rounded px-4 py-2" key={i}>
-            {langs.map((code, i) => (
+            {langs.map(({country}, i) => (
               <ReactCountryFlag
                 className="emojiFlag"
                 key={i}
                 style={{ margin: '0 2px' }}
-                countryCode={code}
-              />
-              ))} {text}
+                countryCode={country}
+              />))} {text}
           </li>
         ))}
       </ul>

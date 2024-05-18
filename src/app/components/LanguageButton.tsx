@@ -3,11 +3,11 @@
 import React, { useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 
-export default function LanguageSelector({ onSelected, code, name }) {
+export default function LanguageSelector({ onSelected, code, country, name }) {
   const [selected, setSelected] = useState(false);
 
   const select = () => {
-    onSelected(code, !selected);
+    onSelected(code, country, !selected);
     setSelected(!selected);
   };
 
@@ -21,7 +21,7 @@ export default function LanguageSelector({ onSelected, code, name }) {
       >
         <ReactCountryFlag
           className="emojiFlag"
-          countryCode={code}
+          countryCode={country}
           aria-label={name}
         />
         {" " + name}
