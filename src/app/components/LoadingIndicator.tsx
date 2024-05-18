@@ -1,4 +1,3 @@
-
 export default function LoadingIndicator() {
   return (
     <section className="mt-8">
@@ -9,10 +8,13 @@ export default function LoadingIndicator() {
           gridTemplateColumns: "repeat(auto-fill, minmax(18rem, 1fr))",
         }}
       >
-    {[...Array(4)].map((x, i) =>
-      <li key={i} className="rounded h-36 min-w-64 p-4 shadow flex flex-col animate-pulse bg-gray-100"/>
-    )}
-  </ul>
+        {[...Array(4)].map((x, i) => (
+          <li
+            key={i}
+            className="rounded h-36 min-w-64 p-4 shadow flex flex-col animate-pulse bg-gray-100"
+          />
+        ))}
+      </ul>
     </section>
   );
 }

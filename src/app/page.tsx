@@ -17,14 +17,17 @@ export default function Home() {
   const onSelected = (code, country, selected) => {
     setSelectedLangs(
       selected
-        ? [...selectedLangs, {country, code}]
+        ? [...selectedLangs, { country, code }]
         : selectedLangs.filter((x) => x.code != code),
     );
   };
 
   const saveTranslation = (text, langs) => {
-    const current = JSON.parse(localStorage.getItem('translations') || '[]');
-    localStorage.setItem('translations', JSON.stringify([...current, {text, langs}]));
+    const current = JSON.parse(localStorage.getItem("translations") || "[]");
+    localStorage.setItem(
+      "translations",
+      JSON.stringify([...current, { text, langs }]),
+    );
   };
 
   const onTranslate = async (text) => {
@@ -52,7 +55,9 @@ export default function Home() {
         <LanguageSelector onSelected={onSelected} />
       </div>
       {isLoading && <LoadingIndicator />}
-      {translations.length != 0 && !isLoading && <TranslationList data={translations} />}
+      {translations.length != 0 && !isLoading && (
+        <TranslationList data={translations} />
+      )}
       <PreviousTranslations />
     </main>
   );
