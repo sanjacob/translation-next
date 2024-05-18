@@ -7,10 +7,12 @@ import InputField from "./components/InputField";
 import LanguageSelector from "./components/LanguageSelector";
 import TranslationList from "./components/TranslationList";
 import PreviousTranslations from "./components/PreviousTranslations";
+import LoadingIndicator from "./components/LoadingIndicator";
 
 export default function Home() {
   const [translations, setTranslations] = useState([]);
   const [selectedLangs, setSelectedLangs] = useState([]);
+  const [isLoading, setLoading] = useState(false);
 
   const onSelected = (code, selected) => {
     setSelectedLangs(
@@ -26,6 +28,7 @@ export default function Home() {
   };
 
   const onTranslate = async (text) => {
+    setLoading(true);
     saveTranslation(text, selectedLangs);
 
     try {
@@ -36,6 +39,7 @@ export default function Home() {
 
       const apiTranslations = await JSON.parse(responseData.result);
       setTranslations(apiTranslations.translations);
+      setLoading(false);
     } catch (error) {
       alert("Could not make translation due to a server error");
     }
@@ -47,7 +51,8 @@ export default function Home() {
         <InputField onTranslate={async (input) => onTranslate(input)} />
         <LanguageSelector onSelected={onSelected} />
       </div>
-      {translations.length != 0 && <TranslationList data={translations} />}
+      {isLoading && <LoadingIndicator />}
+      {translations.length != 0 && !isLoading && <TranslationList data={translations} />}
       <PreviousTranslations />
     </main>
   );
