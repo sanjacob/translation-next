@@ -6,6 +6,7 @@ import Image from "next/image";
 import InputField from "./components/InputField";
 import LanguageSelector from "./components/LanguageSelector";
 import TranslationList from "./components/TranslationList";
+import PreviousTranslations from "./components/PreviousTranslations";
 
 export default function Home() {
   const [translations, setTranslations] = useState([]);
@@ -19,15 +20,24 @@ export default function Home() {
     );
   };
 
+  const saveTranslation = (text, langs) => {
+    const current = JSON.parse(localStorage.getItem('translations') || '[]');
+    localStorage.setItem('translations', JSON.stringify([...current, {text, langs}]));
+  };
+
   const onTranslate = async (text) => {
+    saveTranslation(text, selectedLangs);
+
     try {
-      const response = await fetch(`/api?text=${text}&languages=${selectedLangs}`);
+      const response = await fetch(
+        `/api?text=${text}&languages=${selectedLangs}`,
+      );
       const responseData = await response.json();
 
       const apiTranslations = await JSON.parse(responseData.result);
       setTranslations(apiTranslations.translations);
     } catch (error) {
-      alert('Could not make translation due to a server error')
+      alert("Could not make translation due to a server error");
     }
   };
 
@@ -38,6 +48,7 @@ export default function Home() {
         <LanguageSelector onSelected={onSelected} />
       </div>
       {translations.length != 0 && <TranslationList data={translations} />}
+      <PreviousTranslations />
     </main>
   );
 }

@@ -1,7 +1,6 @@
 import Translation from "./Translation";
 
 export default function TranslationList({ data }) {
-  console.log(data);
   return (
     <section className="mt-8">
       <h2 className="text-lg font-bold">Translations</h2>

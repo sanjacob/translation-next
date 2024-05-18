@@ -20,7 +20,7 @@ export default function InputField({ onTranslate, onReset }) {
         <button
           className="p-2 my-4 shadow rounded bg-black text-white
                        hover:bg-gray-800"
-                       onClick={() => onTranslate(input)}
+          onClick={() => onTranslate(input)}
         >
           Translate
         </button>

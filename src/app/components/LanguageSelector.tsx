@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import languages from "../lib/languages";
 import LanguageButton from "./LanguageButton";
 
-export default function LanguageSelector({onSelected}) {
+export default function LanguageSelector({ onSelected }) {
   return (
     <div className="flex-grow flex-shrink basis-1/3 h-full">
       <h2 className="font-bold mb-2">
